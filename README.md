@@ -1,6 +1,6 @@
 # Bump API
 
-This Bump API is aimed at making stateless version numbering avaibale via API endpoint.
+This Bump API is aimed at making stateless version numbering available via API endpoint.
 
 Bump API is build on top of [treeder/bump](https://hub.docker.com/r/treeder/bump/)
 
