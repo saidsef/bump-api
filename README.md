@@ -8,7 +8,7 @@ Bump API is build on top of [treeder/bump](https://hub.docker.com/r/treeder/bump
 
 Software versioning is the process of assigning either unique version names or unique version numbers to unique states of computer software. Within a given version number category (major, minor and patch), these numbers are generally assigned in increasing order and correspond to new developments in the software. 
 
-Semantic versioning (aka SemVer)[1], currently the best known and most widely adopted version scheme in this category, uses a sequence of three digits (Major.Minor.Patch), an optional prerelease tag and optional build meta tag. In this scheme, risk and functionality are the measures of significance.
+Semantic versioning (aka SemVer), currently the best known and most widely adopted version scheme in this category, uses a sequence of three digits (Major.Minor.Patch), an optional prerelease tag and optional build meta tag. In this scheme, risk and functionality are the measures of significance.
 
 For further [information](https://en.wikipedia.org/wiki/Software_versioning)
 
