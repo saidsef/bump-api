@@ -32,7 +32,7 @@ PORT=7070 bump-api.py
 
 The quest must be POST method:
 ```shell
-curl -XPOST http://lcoalhost:7070/api/v1/version -H 'Content-Type: application/json' @bump-api.json
+curl -XPOST http://lcoalhost:7070/api/v1/version -H 'Content-Type: application/json' @test/bump-api.json
 ```
 
 And the response will look like:
