@@ -5,7 +5,7 @@ import logging
 import tempfile
 from subprocess import check_output, STDOUT
 from json import dumps, loads
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 
 PORT  = os.environ.get("PORT")
 app   = Flask(__name__)
@@ -45,9 +45,9 @@ def version():
 
         new_version = version_out(file_path)
         out = { "new_version": new_version }
-        return dumps(out)
+        return Response(dumps(out), mimetype='application/json')
     else:
-        return dumps({'message': 'healthy'})
+        return Response(dumps({'message': 'healthy'}), mimetype='application/json')
 
 if __name__ =='__main__':
     app.run(host='0.0.0.0', port=PORT)
