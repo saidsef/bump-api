@@ -4,7 +4,7 @@ This Bump API is aimed at making stateless version numbering available via API e
 
 Bump API is build on top of [treeder/bump](https://hub.docker.com/r/treeder/bump/)
 
-# Documentation
+## Documentation
 
 Software versioning is the process of assigning either unique version names or unique version numbers to unique states of computer software. Within a given version number category (major, minor and patch), these numbers are generally assigned in increasing order and correspond to new developments in the software. 
 
@@ -12,7 +12,7 @@ Semantic versioning (aka SemVer)[1], currently the best known and most widely ad
 
 For further [information](https://en.wikipedia.org/wiki/Software_versioning)
 
-# Deployment
+## Deployment
 
 As a container:
 
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 PORT=7070 bump-api.py
 ```
 
-# The Request
+## The Request
 
 The quest must be POST method:
 ```shell
@@ -43,7 +43,7 @@ And the response will look like:
 }
 ```
 
-# Kubernetes
+## Kubernetes
 
 ```shell
 kubectl apply -f deployment/bump-api-k8s.yml
@@ -51,4 +51,4 @@ kubectl apply -f deployment/bump-api-k8s.yml
 
 ## TODO
 
-[ ] Error Handling
+ - [ ] Error Handling
