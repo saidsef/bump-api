@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bump-api
+  namespace: web
+  labels:
+    name: bump-api
+    app: bump-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bump-api
+  template:
+    metadata:
+      labels:
+        app: bump-api
+    spec:
+      containers:
+      - name: bump-api
+        image: saidsef/bump-api:latest
+        ports:
+        - containerPort: 7070
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bump-api
+  namespace: web
+  labels:
+    app: bump-api
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  bump-api
+      prefix: /
+      service: bump-api:7070
+      host: bump-api.saidsef.co.uk
+spec:
+  type: NodePort
+  selector:
+    app: bump-api
+  ports:
+  - protocol: TCP
+    port: 7070
+    targetPort: 7070
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: bump-api
+  namespace: web
+spec:
+  rules:
+  - host: bump-api.saidsef.co.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bump-api
+          servicePort: 7070
+
