@@ -46,7 +46,7 @@ And the response will look like:
 ## Kubernetes
 
 ```shell
-kubectl apply -f deployment/bump-api-k8s.yml
+kubectl apply -f deployment/k8s-bump-api.yml
 ```
 
 ## TODO
