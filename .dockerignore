@@ -1,2 +1,5 @@
 # files/folders to ignore
-.git/*
+.git/
+deployment/
+test/
+Dockerfile

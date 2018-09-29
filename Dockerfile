@@ -6,7 +6,7 @@ ENTRYPOINT []
 
 ###############################################################################
 
-FROM python:3.6-alpine
+FROM python:3-alpine
 MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 
 ARG PORT=""
@@ -19,9 +19,11 @@ WORKDIR /app
 COPY --from=builder /script/bump /usr/bin/
 COPY . /app
 
-RUN pip install -r requirements.txt && \
-    chmod +x /usr/bin/bump
+RUN pip --no-cache-dir install -r requirements.txt && \
+    chown -R nobody:nobody .
+
+USER nobody
 
 EXPOSE ${PORT}
 
-CMD ["python3", "bump-api.py"]
+CMD ["python", "bump-api.py"]
