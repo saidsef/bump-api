@@ -49,6 +49,6 @@ And the response will look like:
 kubectl apply -f deployment/bump-api-k8s.yml
 ```
 
-# TODO
+## TODO
 
-[] Error Handling
+[ ] Error Handling
