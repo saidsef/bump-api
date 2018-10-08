@@ -31,6 +31,10 @@ def version_out(path):
         version = fh.readline()
     return version
 
+@app.route('/', methods=['GET'])
+def index():
+  return jsonify(['{} {}'.format(list(rule.methods), rule) for rule in app.url_map.iter_rules() if 'static' not in str(rule)])
+
 @app.route('/api/v1/version', methods=['GET', 'POST'])
 def version():
     if request.method == 'POST':
