@@ -12,7 +12,7 @@ MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 ARG PORT=""
 
 ENV PORT ${PORT:-7070}
-ENV version 1.0
+ENV version 1.5
 
 WORKDIR /app
 
