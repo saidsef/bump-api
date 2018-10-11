@@ -3,9 +3,9 @@
 import os
 import logging
 import tempfile
-from subprocess import check_output, STDOUT
 from json import dumps, loads
 from flask import Flask, request, jsonify, Response
+from subprocess import check_output, STDOUT
 
 PORT  = os.environ.get("PORT")
 app   = Flask(__name__)
