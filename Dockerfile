@@ -7,9 +7,10 @@ ENTRYPOINT []
 ###############################################################################
 
 FROM python:3-alpine
-MAINTAINER Said Sef <saidsef@gmail.com> (saidsef.co.uk/)
 
 ARG PORT=""
+
+LABEL maintainer="saidsef@gmail.com"
 
 ENV PORT ${PORT:-7070}
 ENV version 1.5
@@ -26,4 +27,7 @@ USER nobody
 
 EXPOSE ${PORT}
 
+HEALTHCHECK --interval=30s --timeout=10s CMD curl --fail http://localhost:${PORT}/ || exit 1
+
 CMD ["python", "bump-api.py"]
+ENTRYPOINT ["python"]
