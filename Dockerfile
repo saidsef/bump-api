@@ -29,5 +29,5 @@ EXPOSE ${PORT}
 
 HEALTHCHECK --interval=30s --timeout=10s CMD curl --fail http://localhost:${PORT}/ || exit 1
 
-CMD ["python", "bump-api.py"]
+CMD ["bump-api.py"]
 ENTRYPOINT ["python"]
