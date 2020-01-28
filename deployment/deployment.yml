@@ -27,7 +27,21 @@ spec:
         ports:
         - containerPort: 7070
         livenessProbe:
+          exec:
+            command:
+              - pgrep
+              - python
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        readinessProbe:
           tcpSocket:
             port: 7070
           initialDelaySeconds: 3
-          periodSeconds: 3
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "512Mi"
