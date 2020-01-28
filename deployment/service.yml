@@ -7,9 +7,6 @@ metadata:
   labels:
     app: bump-api
     tier: frontend
-  annotations:
-    prometheus.io/port: "7070"
-    prometheus.io/scrape: "true"
 spec:
   type: NodePort
   selector:
