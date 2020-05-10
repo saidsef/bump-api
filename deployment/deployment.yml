@@ -14,18 +14,24 @@ spec:
       app: bump-api
   template:
     metadata:
+      labels:
+        app: bump-api
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "7070"
-      labels:
-        app: bump-api
     spec:
+      restartPolicy: Always
+      securityContext:
+        runAsGroup: 65534
+        runAsUser: 65534
       containers:
       - name: bump-api
         image: saidsef/bump-api:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 7070
+          protocol: TCP
+          name: web
         livenessProbe:
           exec:
             command:
@@ -33,11 +39,17 @@ spec:
               - python
           initialDelaySeconds: 3
           periodSeconds: 5
+          failureThreshold: 2
+          successThreshold: 1
+          timeoutSeconds: 3
         readinessProbe:
           tcpSocket:
             port: 7070
           initialDelaySeconds: 3
           periodSeconds: 5
+          failureThreshold: 2
+          successThreshold: 1
+          timeoutSeconds: 3
         resources:
           requests:
             cpu: "50m"
