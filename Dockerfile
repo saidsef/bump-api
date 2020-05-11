@@ -13,7 +13,7 @@ ARG PORT=""
 LABEL maintainer="saidsef@gmail.com"
 
 ENV PORT ${PORT:-7070}
-ENV version 1.5
+ENV version 2.0
 
 WORKDIR /app
 
