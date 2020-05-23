@@ -57,3 +57,13 @@ spec:
           limits:
             cpu: "100m"
             memory: "512Mi"
+        securityContext:
+          allowPrivilegeEscalation: false
+          # user/group: nobody
+          runAsGroup: 65534
+          runAsUser: 65534
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
