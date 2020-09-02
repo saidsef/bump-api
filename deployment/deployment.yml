@@ -8,6 +8,7 @@ metadata:
     name: bump-api
     app: bump-api
 spec:
+  revisionHistoryLimit: 2
   replicas: 1
   selector:
     matchLabels:
@@ -62,6 +63,9 @@ spec:
           # user/group: nobody
           runAsGroup: 65534
           runAsUser: 65534
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          privileged: false
           capabilities:
             drop:
               - ALL
