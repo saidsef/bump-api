@@ -16,10 +16,10 @@ metadata:
       server_tokens off;
 spec:
   rules:
-  - host: bump-api.saidsef.co.uk
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: bump-api
-          servicePort: 7070
+    - host: bump-api.saidsef.co.uk
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: bump-api
+              servicePort: 7070
