@@ -5,14 +5,15 @@ import logging
 import tempfile
 from json import dumps, loads
 from flask import Flask, request, jsonify, Response
+from flask_wtf.csrf import CSRFProtect
 from subprocess import check_output, STDOUT
 from prometheus_flask_exporter import PrometheusMetrics
 
 PORT  = os.environ.get("PORT")
 app   = Flask(__name__)
+csrf  = CSRFProtect()
 
-#PrometheusMetrics(app, group_by='path')         # the default
-#PrometheusMetrics(app, group_by='endpoint')     # by endpoint
+csrf.init_app(app)
 PrometheusMetrics(app, group_by='url_rule')     # by URL rule
 
 logging.getLogger(__name__)
@@ -54,9 +55,9 @@ def version():
 
         new_version = version_out(file_path)
         out = { "new_version": new_version }
-        return Response(dumps(out), mimetype='application/json')
+        return Response(dumps(out), 200, mimetype='application/json')
     else:
-        return Response(dumps({'message': 'healthy'}), mimetype='application/json')
+        return Response(dumps({'message': 'healthy'}), 200, mimetype='application/json')
 
 if __name__ =='__main__':
     app.run(host='0.0.0.0', port=PORT)

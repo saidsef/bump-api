@@ -12,7 +12,7 @@ spec:
   selector:
     app: bump-api
   ports:
-  - protocol: TCP
-    port: 7070
-    targetPort: 7070
-    name: web
+    - protocol: TCP
+      port: 7070
+      targetPort: 7070
+      name: web
