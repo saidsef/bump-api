@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bump-api
-  namespace: web
   labels:
     name: bump-api
     app: bump-api
@@ -32,7 +31,7 @@ spec:
           ports:
             - containerPort: 7070
               protocol: TCP
-              name: web
+              name: http
           livenessProbe:
             exec:
               command:
