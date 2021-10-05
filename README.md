@@ -48,3 +48,13 @@ And the response will look like:
 ```shell
 kubectl apply -k ./deployment
 ```
+
+## Source
+
+Our latest and greatest source of Jenkins can be found on [GitHub](#deployment). Fork us!
+
+## Contributing
+
+We would :heart:  you to contribute by making a [pull request](https://github.com/saidsef/bump-api/pulls).
+
+Please read the official [Contribution Guide](./CONTRIBUTING.md) for more information on how you can contribute.
