@@ -8,3 +8,11 @@ resources:
   - deployment.yml
   - service.yml
   - ingress.yml
+
+vars:
+- fieldref: {}
+  name: HOST
+  objref:
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    name: bump-api
