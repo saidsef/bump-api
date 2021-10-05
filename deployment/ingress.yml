@@ -15,7 +15,7 @@ metadata:
       server_tokens off;
 spec:
   rules:
-    - host: bump-api.saidsef.co.uk
+    - host: $(HOST)
       http:
         paths:
           - path: /
