@@ -17,7 +17,7 @@ For further [information](https://en.wikipedia.org/wiki/Software_versioning)
 As a container:
 
 ```shell
-docker run -d -p 7070:7070 saidsef/bump-api:latest
+docker run -d -p 7070:7070 docker.io/saidsef/bump-api:latest
 ```
 
 As a Python application:
@@ -31,6 +31,7 @@ PORT=7070 bump-api.py
 ## The Request
 
 The quest must be POST method:
+
 ```shell
 curl -XPOST http://localhost:7070/api/v1/version -H 'Content-Type: application/json' @test/bump-api.json
 ```
