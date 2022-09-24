@@ -21,6 +21,7 @@ COPY --from=builder /script/bump /usr/bin/
 COPY . /app
 
 RUN pip --no-cache-dir install -r requirements.txt && \
+    apk add -U --no-cache expat && \
     chown -R nobody:nobody .
 
 USER nobody
