@@ -7,6 +7,9 @@ on:
     paths:
       - "Dockerfile"
       - "test/**"
+      - "Pipfile"
+      - "Pipfile.lock"
+      - "requirements.txt"
       - ".github/workflows/docker.yml"
   pull_request:
     branches:
@@ -14,6 +17,9 @@ on:
     paths:
       - "Dockerfile"
       - "test/**"
+      - "Pipfile"
+      - "Pipfile.lock"
+      - "requirements.txt"
       - ".github/workflows/docker.yml"
   workflow_dispatch:
 
