@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 flask = "==2.2.2"
 flask-wtf = "==1.1.1"
-prometheus-flask-exporter = "==0.20.3"
+prometheus-flask-exporter = "==0.21.0"
 
 [dev-packages]
 
