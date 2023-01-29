@@ -5,9 +5,18 @@ on:
       - Tagging
     types:
       - completed
-    branch:
+    branches:
       - main
+    paths:
+      - "deployment/*"
   workflow_dispatch:
+
+env:
+  COMMIT_MSG: ${{ github.event.head_commit.message }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   release:
@@ -33,16 +42,16 @@ jobs:
             const { repo: { owner, repo }, sha } = context;
             const tag = process.env.DATE;
             let release_id = 0;
-
             try {
               const release = await github.rest.repos.createRelease({
                 owner, repo,
                 tag_name: tag,
                 title: tag,
+                name: tag,
                 draft: false,
+                make_latest: "true",
                 target_commitish: sha
               });
-
               release_id = release.data.id;
             } catch (e) {
               let latest;
@@ -53,7 +62,6 @@ jobs:
               }
               release_id = latest.data.id;
             }
-
             return release_id
 
       - name: Upload Release Assets
@@ -64,14 +72,13 @@ jobs:
           script: |
             const { repo: { owner, repo }, sha } = context;
             const fs = require('fs').promises;
-
             try {
               let asset_ids = await github.rest.repos.listReleaseAssets({
                 owner, repo,
                 release_id: ${{ steps.release.outputs.result }}
               })
               for (let asset of asset_ids.data) {
-                await github.repos.deleteReleaseAsset({
+                await github.rest.repos.deleteReleaseAsset({
                   owner, repo,
                   asset_id: asset.id
                 });
