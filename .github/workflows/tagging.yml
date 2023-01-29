@@ -5,10 +5,11 @@ on:
       - CI
     types:
       - completed
-    branch:
+    branches:
       - main
     paths:
       - "deployment/*"
+
   workflow_dispatch:
 
 env:
@@ -34,25 +35,30 @@ jobs:
           github-token: ${{ github.token }}
           script: |
             let tagExists = [];
+            const commit = await github.rest.repos.getCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'main'
+            });
             try {
               await github.rest.git.createRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 ref: "refs/tags/${{ env.DATE }}",
                 message: "${{ env.CHANGELOG }}",
-                sha: context.sha
+                sha: commit.data.sha.toString()
               });
             } catch (e) {
               console.log("Tag already exists: " + e)
               tagExists.push(e);
             }
-
             if (tagExists.length > 0) {
               await github.rest.git.updateRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 ref: "tags/${{ env.DATE }}",
+                sha: commit.data.sha.toString(),
                 message: "${{ env.CHANGELOG }}",
-                sha: context.sha
+                force: true
               });
             }
