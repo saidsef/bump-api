@@ -4,18 +4,18 @@ kind: Deployment
 metadata:
   name: bump-api
   labels:
-    name: bump-api
-    app: bump-api
+    app.kubernetes.io/name: bump-api
+    app.kubernetes.io/instance: bump-api
 spec:
   revisionHistoryLimit: 2
   replicas: 1
   selector:
     matchLabels:
-      app: bump-api
+      app.kubernetes.io/instance: bump-api
   template:
     metadata:
       labels:
-        app: bump-api
+        app.kubernetes.io/instance: bump-api
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "7070"
@@ -24,10 +24,18 @@ spec:
       securityContext:
         runAsGroup: 65534
         runAsUser: 65534
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: bump-api
-          image: saidsef/bump-api:latest
+          image: docker.io/saidsef/bump-api:v2023.02
           imagePullPolicy: Always
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           ports:
             - containerPort: 7070
               protocol: TCP
@@ -59,14 +67,17 @@ spec:
               memory: "512Mi"
           securityContext:
             allowPrivilegeEscalation: false
-            # user/group: nobody
-            runAsGroup: 65534
-            runAsUser: 65534
-            runAsNonRoot: true
             readOnlyRootFilesystem: true
             privileged: false
             capabilities:
               drop:
                 - ALL
-              add:
-                - NET_BIND_SERVICE
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+              subPath: tmp
+              readOnly: false
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 1Gi

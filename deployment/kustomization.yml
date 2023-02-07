@@ -7,6 +7,14 @@ resources:
   - service.yml
   - ingress.yml
 
+images:
+  - name: bump-api
+    newName: docker.io/saidsef/bump-api
+    newTag: v2023.02
+
+commonAnnotations:
+  app.kubernetes.io/managed-by: kustomizer
+
 vars:
 - fieldref: {}
   name: HOST

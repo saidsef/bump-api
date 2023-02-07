@@ -4,12 +4,13 @@ kind: Service
 metadata:
   name: bump-api
   labels:
-    app: bump-api
-    tier: frontend
+    app.kubernetes.io/instance: bump-api
+    app.kubernetes.io/tier: frontend
 spec:
   type: ClusterIP
+
   selector:
-    app: bump-api
+    app.kubernetes.io/instance: bump-api
   ports:
     - protocol: TCP
       port: 7070
