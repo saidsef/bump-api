@@ -1,5 +1,6 @@
 # files/folders to ignore
 .git/
+.github/
 deployment/
 test/
 Dockerfile

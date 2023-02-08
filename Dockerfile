@@ -1,4 +1,4 @@
-FROM treeder/bump AS builder
+FROM docker.io/treeder/bump AS builder
 USER root
 
 CMD []
@@ -6,14 +6,14 @@ ENTRYPOINT []
 
 ###############################################################################
 
-FROM python:3-alpine3.16
+FROM docker.io/python:3.10-alpine3.17
 
 ARG PORT=""
 
 LABEL maintainer="saidsef@gmail.com"
 
 ENV PORT ${PORT:-7070}
-ENV version 2.1
+ENV version 3.1
 
 WORKDIR /app
 
@@ -28,7 +28,7 @@ USER nobody
 
 EXPOSE ${PORT}
 
-HEALTHCHECK --interval=30s --timeout=10s CMD curl --fail http://localhost:${PORT}/ || exit 1
+HEALTHCHECK --interval=60s --timeout=10s CMD curl --fail http://localhost:${PORT}/ || exit 1
 
 CMD ["bump-api.py"]
-ENTRYPOINT ["python"]
+ENTRYPOINT ["/usr/local/bin/python"]

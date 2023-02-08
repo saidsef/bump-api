@@ -3,6 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bump-api
+  labels:
+    app.kubernetes.io/name: bump-api
   annotations:
     kubernetes.io/ingress.class: nginx
     ingress.kubernetes.io/proxy-body-size: "0"

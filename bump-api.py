@@ -9,7 +9,8 @@ from flask_wtf.csrf import CSRFProtect
 from subprocess import check_output, STDOUT
 from prometheus_flask_exporter import PrometheusMetrics
 
-PORT = os.environ.get("PORT")
+HOST = os.environ.get("POD_IP", "0.0.0.0")
+PORT = os.environ.get("PORT", "7070")
 app = Flask(__name__)
 csrf = CSRFProtect()
 
@@ -69,4 +70,4 @@ def version():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=PORT)
+    app.run(host=HOST, port=PORT)
