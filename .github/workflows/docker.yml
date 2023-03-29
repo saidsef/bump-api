@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - "bump-api.py"
       - "Dockerfile"
       - "test/**"
       - "Pipfile"
@@ -15,6 +16,7 @@ on:
     branches:
       - main
     paths:
+      - "bump-api.py"
       - "Dockerfile"
       - "test/**"
       - "Pipfile"
