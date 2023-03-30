@@ -6,7 +6,7 @@ import tempfile
 from json import dumps, loads
 from flask import Flask, request, jsonify, Response
 from flask_wtf.csrf import CSRFProtect
-from subprocess import check_output, STDOUT
+from subprocess import run, STDOUT, PIPE
 from prometheus_flask_exporter import PrometheusMetrics
 
 HOST = os.environ.get("POD_IP", "0.0.0.0")
@@ -15,7 +15,7 @@ app = Flask(__name__)
 csrf = CSRFProtect()
 
 csrf.init_app(app)
-PrometheusMetrics(app, group_by='url_rule')     # by URL rule
+PrometheusMetrics(app, group_by='url_rule') # by URL rule
 
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
@@ -27,9 +27,10 @@ def version_path():
     file_path = os.path.join(tmpdir, file_name)
     return file_path
 
-
 def version_inc(path, msg):
-    return check_output("bump --filename {} {}".format(path, msg), stderr=STDOUT, shell=True)
+    command = ["bump", "--filename", path, msg]
+    result = run(command, stdout=PIPE, stderr=STDOUT)
+    return result.stdout.decode().strip()
 
 
 def version_update(path, v):

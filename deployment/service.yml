@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/tier: frontend
 spec:
   type: ClusterIP
-
   selector:
     app.kubernetes.io/instance: bump-api
   ports:
