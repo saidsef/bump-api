@@ -18,7 +18,7 @@ spec:
         app.kubernetes.io/instance: bump-api
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "7070"
+        filter.by.port.name: "true"
     spec:
       restartPolicy: Always
       securityContext:
