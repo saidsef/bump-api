@@ -6,7 +6,7 @@ ENTRYPOINT []
 
 ###############################################################################
 
-FROM docker.io/python:3.11-alpine3.17
+FROM docker.io/python:3.12-alpine3.17
 
 ARG PORT=""
 
