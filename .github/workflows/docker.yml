@@ -143,7 +143,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     steps:
     - name: Auto Approve PR
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
        script: |
         github.rest.pulls.createReview({
@@ -159,7 +159,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     steps:
     - name: Add Preview Label
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
         script: |
           github.rest.issues.addLabels({
